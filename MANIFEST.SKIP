@@ -1,0 +1,7 @@
+MANIFEST.SKIP
+MANIFEST.bak
+Makefile$
+bench.t
+.*\.swp
+blib/
+.git/
