@@ -1,18 +1,36 @@
-Games::RollDice version 0.01
+Games::RollDice
 
-[ REPLACE THIS...
+THIS MODULE IS STILL UNDERGOING DEVELOPMENT.  It is not complete yet.  The description below
+describes what it _will_ do, not what it does now.
 
-  The README is used to introduce the module and provide instructions on
-  how to install the module, any machine dependencies it may have (for
-  example C compilers and installed libraries) and any other information
-  that should be understood before the module is installed.
+You can use this module to generate a roll of an N-sided die, or many N-sided dice.  Notation is
+standard RPG (such as D&D) notation, but extended with some custom operators.  Examples:
 
-  A README file is required for CPAN modules since CPAN extracts the
-  README file from a module distribution so that people browsing the
-  archive can use it get an idea of the modules uses. It is usually a
-  good idea to provide version information here so that people can
-  decide whether fixes for the module are worth downloading.
-]
+	# D&D
+	my @results = roll("3d6");		# returns 3 random numbers, each from 1 to 6
+	my $result = roll("3d6");		# same thing, but add them together and return the sum
+	my $result = roll("3+d6");		# roll 4d6, drop the lowest result, return sum of the rest
+	my $result = roll("3++d6");		# same thing, but best 3 out of 5
+	my $result = roll("3*d6");		# "first die full" (same as 2d6 + 6)
+	my $result = roll("3**d6");		# same as 1d6 + 12
+	my $result = roll("3^d6");		# 3d6, but any 1s count as 2s
+	my $result = roll("3^^d6");		# 1s and 2s count as 3s
+	my $result = roll("3^*++d6");	# can make wacky combos
+	my $result = roll("3+*+^d6");	# order of the symbols doesn't matter
+	my $result = roll("d%");		# return a number between 1 and 100
+	my $result = roll("85@d%");		# return 1 if d% is 85 or higher, else 0
+	# Storyteller
+	my $result = roll("7@5d10");	# instead of sum, return count of results that are >= 7
+	my @result = roll("7@5d10");	# *exactly* the same as roll("5d10") in list context
+	my $result = roll("7@5&d10");	# a 10 counts as a 10, plus you roll another d10
+	my $result = roll("7@5&&d10");	# reroll 9s and 10s
+	# Fudge
+	my $result = roll("4dF");		# returns a number between -4 and 4
+	# Heroscape
+	my $result = roll("3A");		# roll 3 attack dice; return number of skulls
+	my $result = roll("3D");		# roll 3 defense dice; return number of shields
+	my $result = roll("3V");		# roll 3 Valkyrie dice; return number of Valkyrie symbols
+	my $result = roll("3&A");		# 3 Valk dice, reroll symbols, return number of skulls
 
 
 INSTALLATION
