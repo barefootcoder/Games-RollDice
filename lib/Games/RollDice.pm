@@ -7,12 +7,7 @@ use warnings;
 
 use Carp;
 
-# Other recommended modules (uncomment to use):
-#  use IO::Prompt;
-#  use Perl6::Export;
-#  use Perl6::Slurp;
-#  use Perl6::Say;
-#  use Regexp::Autoflags;
+use List::Util qw< sum >;
 
 
 # Module implementation here
@@ -24,11 +19,14 @@ our $VERSION = '0.50_01';
 
 sub roll
 {
-	my ($spec) = @_;
-	$spec =~ /d(\d+)/ or die("illegal die spec: $spec");
-	my ($size) = ($1);
+    my ($spec) = @_;
+    $spec =~ /^(\d+)?d(\d+)$/ or die("illegal die spec: $spec");
+    my $num_dice = $1 || 1;
+    my $size = $2;
 
-	return int(rand($size)) + 1;
+    my @dice;
+    push @dice, int(rand($size)) + 1 for 1..$num_dice;
+    return wantarray ? @dice : sum @dice;
 }
 
 
